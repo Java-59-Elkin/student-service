@@ -1,4 +1,4 @@
-import {Student} from "../model/srudent.js";
+import {Student} from "../model/student.js";
 
 const students = new Map();
 
@@ -26,4 +26,30 @@ export const updateStudent = (id, data) => {
         Object.assign(student, data);
         return student;
     }
+}
+
+export const addScore = (id, data) => {
+    const student = students.get(id);
+    if (student) {
+        if (!student.scores) {
+            student.scores = {};
+        }
+        student.scores[data.examName] = data.score;
+        return student;
+    }
+}
+
+export const findByName = (name) => {
+    const tmp = Array.from(students.values());
+    const result = tmp.filter(student => student.name === name);
+    return result;
+}
+
+export const countByName = (names) => {
+    const tmp = Array.from(students.values());
+    const namesCount = {};
+    for (const name of names) {
+        namesCount[name] = tmp.filter(student => student.name === name).length;
+    }
+    return namesCount;
 }

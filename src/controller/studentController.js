@@ -43,16 +43,37 @@ export const deleteStudent = (req, res) => {
 }
 
 export const addScore = (req, res) => {
-    // TODO
+    const student = repo.addScore(+req.params.id, req.body);
+    if (student) {
+        res.status(200).send("true");
+    } else {
+        res.status(404).send();
+    }
 }
 
 export const findByName = (req, res) => {
-    // TODO
+    const students = repo.findByName(req.params.name);
+    if (students.length > 0) {
+        const result = students.map(student => {
+            const tmp = {...student}
+            delete tmp.password;
+            return tmp;
+        })
+        res.status(200).json(result);
+    } else {
+        res.status(404).send();
+    }
 }
 
 export const countByName = (req, res) => {
-    // TODO
-}
+    const names = req.query.names;
+    if (names) {
+        const nameList = Array.isArray(names) ? names : [names];
+        const result = repo.countByName(nameList);
+        res.status(200).json(result);
+    }
+};
+
 
 export const findByMinScore = (req, res) => {
     // TODO
