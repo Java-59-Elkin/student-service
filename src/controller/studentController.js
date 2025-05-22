@@ -74,7 +74,11 @@ export const countByName = (req, res) => {
     }
 };
 
-
 export const findByMinScore = (req, res) => {
-    // TODO
+    const examName = req.params.exam;
+    const minScore = req.params.minScore;
+    if (examName && minScore) {
+        const result = repo.findByMinScore(examName, +minScore);
+        res.status(200).json(result);
+    }
 }

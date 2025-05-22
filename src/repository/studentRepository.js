@@ -53,3 +53,14 @@ export const countByName = (names) => {
     }
     return namesCount;
 }
+
+export const findByMinScore = (examName, minScore) => {
+    const tmp = Array.from(students.values());
+    const studentsMinScore = [];
+    for (let t = 0; t < tmp.length; t++) {
+        if ((tmp[t].scores[examName] !== undefined) && (tmp[t].scores[examName] >= +minScore)) {
+            studentsMinScore.push(tmp[t]);
+        }
+    }
+    return studentsMinScore;
+}

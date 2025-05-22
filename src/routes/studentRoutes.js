@@ -18,7 +18,7 @@ router.patch('/student/:id', updateStudent);
 router.patch('/score/student/:id', addScore);
 router.get('/students/name/:name', findByName);
 router.get('/quantity/students', countByName);
-// router.get('/students/exam/:exam/minscore/:minScore', findByMinScore);
+router.get('/students/exam/:exam/minscore/:minScore', findByMinScore);
 
 
 export default router;
